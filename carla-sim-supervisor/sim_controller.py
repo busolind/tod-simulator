@@ -12,7 +12,8 @@ class CarlaHandlerRPC:
 
     def __init__(self, carla_sh_path) -> None:
         self._carla_simulator_proc = None
-        self._carla_launch_script = [carla_sh_path, '-RenderOffScreen', '>/dev/null', '2>/dev/null']
+        #self._carla_launch_script = [carla_sh_path, '-RenderOffScreen', '>/dev/null', '2>/dev/null']
+        self._carla_launch_script = [carla_sh_path, '>/dev/null', '2>/dev/null']
 
     def _carla_service_is_active(self):
         return self._carla_simulator_proc is not None and self._carla_simulator_proc.poll() is None
