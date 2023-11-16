@@ -2,8 +2,9 @@ version: '3.9'
 
 services:
   tod-carla:
-    #depends_on: 
-    #  - carla_simulator
+    container_name: tod-carla
+    depends_on: 
+      - carla-simulator
     build: tod-carla
     volumes:
       - type: bind
@@ -26,6 +27,7 @@ services:
   carla-simulator:
     #image: carlasim/carla:0.9.13
     build: carla-sim-supervisor
+    container_name: carla-simulator
 
     privileged: true
     deploy:
@@ -61,8 +63,8 @@ services:
 
    
   zero-delay-network:
-    #depends_on: 
-    #  - tod_simulator
+    depends_on: 
+      - tod-carla
     build: 
       context: zero-delay-network
       args:
