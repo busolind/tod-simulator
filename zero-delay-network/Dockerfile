@@ -7,7 +7,9 @@ COPY . ./
 
 ARG seeds
 ENV seeds ${seeds}
-CMD for s in $seeds; do \
-    python main.py $s \
+CMD sleep 5;\
+    for s in $seeds; do \
+    echo starting simulation seed $s;\
+    python main.py $s; \
     sleep 10; \
     done;
