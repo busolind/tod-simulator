@@ -1,8 +1,8 @@
-[submodule "tod_simulator"]
+[submodule "tod-carla"]
 	path = tod-carla
-	url = https://github.com/Jaivra/tod_simulator
-	branch = dev
-[submodule "tod_omnet_network"]
+	url = git@github.com:busolind/tod-carla.git
+	branch = main
+[submodule "tod-omnet"]
 	path = tod-omnet
-	url = https://github.com/Jaivra/tod_omnet_network
+	url = git@github.com:busolind/tod-omnet.git
 	branch = main
