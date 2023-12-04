@@ -10,10 +10,12 @@ from psutil import TimeoutExpired
 
 class CarlaHandlerRPC:
 
-    def __init__(self, carla_sh_path) -> None:
+    def __init__(self, carla_sh_path, offscreen : bool = False) -> None:
         self._carla_simulator_proc = None
-        #self._carla_launch_script = [carla_sh_path, '-RenderOffScreen', '>/dev/null', '2>/dev/null']
-        self._carla_launch_script = [carla_sh_path, '>/dev/null', '2>/dev/null']
+        if offscreen:
+            self._carla_launch_script = [carla_sh_path, '-RenderOffScreen', '>/dev/null', '2>/dev/null']
+        else:
+            self._carla_launch_script = [carla_sh_path, '>/dev/null', '2>/dev/null']
 
     def _carla_service_is_active(self):
         return self._carla_simulator_proc is not None and self._carla_simulator_proc.poll() is None
@@ -79,8 +81,13 @@ class CarlaHandlerRPC:
 
 if __name__ == '__main__':
     carla_sh_path = sys.argv[1]
+    offscreen = False
+    try:
+        offscreen = bool(sys.argv[2])
+    except IndexError:
+        ...
     print(carla_sh_path)
-    s = zerorpc.Server(CarlaHandlerRPC(carla_sh_path))
+    s = zerorpc.Server(CarlaHandlerRPC(carla_sh_path, offscreen))
     s.bind('tcp://0.0.0.0:4242')
     print('RPC server running')
     s.run()
