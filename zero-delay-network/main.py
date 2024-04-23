@@ -3,7 +3,6 @@ import sys
 import zmq
 import cProfile, pstats
 
-
 def send_info(socket, t):
     socket.send(json.dumps(t).encode("utf-8"))
 
@@ -33,7 +32,10 @@ def main():
 
 
     def read_json(type_request):
-        with open(f'API/{type_request}.json') as f:
+        # with open(f'API_hwy_moving/{type_request}.json') as f:
+        # with open(f'API_hwy/{type_request}.json') as f:
+        #with open(f'API_city_sudden/{type_request}.json') as f:
+        with open(f'API_hwy_sudden/{type_request}.json') as f:
             return json.load(f)
 
 
